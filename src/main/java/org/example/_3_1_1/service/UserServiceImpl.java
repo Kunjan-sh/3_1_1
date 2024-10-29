@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void addUser(String name, String surname, int age) {
+    public void addUser(String name, String surname, Integer age) {
         User user = new User();
         user.setName(name);
         user.setSurname(surname);
@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void updateUser(int id, String name, String surname, Integer age) {
+    public void updateUser(Integer id, String name, String surname, Integer age) {
         User user = userDao.getUser(id);
         if (user != null) {
             if (name != null && !name.isEmpty()) {
@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void deleteUser(int id) {
+    public void deleteUser(Integer id) {
         userDao.deleteUser(id);
     }
 

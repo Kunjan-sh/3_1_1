@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -34,14 +34,14 @@ public class UserController {
     }
 
     @PostMapping("/addUser")
-    public String addUser(@RequestParam("name") String name, @RequestParam("surname") String surname, @RequestParam("age") int age) {
-        userService.addUser(name, surname, age);
+    public String addUser(@ModelAttribute User user) {
+        userService.addUser(user.getName(), user.getSurname(), user.getAge());
         return "redirect:/";
     }
 
     @PostMapping("/deleteUser")
-    public String deleteUser(@RequestParam("id") int id) {
-        userService.deleteUser(id);
+    public String deleteUser(@ModelAttribute User user) {
+        userService.deleteUser(user.getId());
         return "redirect:/";
     }
 
@@ -51,12 +51,8 @@ public class UserController {
     }
 
     @PostMapping("/updateUser")
-    public String updateUser(@RequestParam("id") int id,
-                             @RequestParam(value = "name", required = false) String name,
-                             @RequestParam(value = "surname", required = false) String surname,
-                             @RequestParam(value = "age", required = false) Integer age) {
-        userService.updateUser(id, name, surname, age);
+    public String updateUser(@ModelAttribute User user) {
+        userService.updateUser(user.getId(), user.getName(), user.getSurname(), user.getAge());
         return "redirect:/";
     }
-
 }
